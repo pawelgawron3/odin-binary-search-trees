@@ -1,4 +1,4 @@
-import { sort } from "./helperFunction.js";
+import { sort } from "./mergeSort.js";
 import { createBST } from "./bst.js";
 
 class Tree {
