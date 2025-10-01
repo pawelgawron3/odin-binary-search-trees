@@ -91,6 +91,24 @@ class Tree {
     }
     prettyPrint(this.root);
   }
+
+  find(value) {
+    if (!this.root) {
+      return null;
+    }
+
+    let currNode = this.root;
+    while (currNode) {
+      if (currNode.data > value) {
+        currNode = currNode.left;
+      } else if (currNode.data < value) {
+        currNode = currNode.right;
+      } else {
+        return currNode;
+      }
+    }
+    return null;
+  }
 }
 
 export { Tree };
