@@ -1,5 +1,5 @@
-import { Node } from "./nodeClass.js";
 import { sort } from "./helperFunction.js";
+import { createBST } from "./bst.js";
 
 class Tree {
   constructor(array) {
@@ -8,8 +8,10 @@ class Tree {
 
   root = null;
 
-  buildTree() {
-    let sortedArray = sort(this.array);
+  buildTree(array) {
+    let sortedArray = sort(array);
+    this.root = createBST(sortedArray);
+    return this.root;
   }
 }
 
