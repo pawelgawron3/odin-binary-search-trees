@@ -1,5 +1,6 @@
 import { sort } from "./mergeSort.js";
 import { createBST } from "./bst.js";
+import { prettyPrint } from "./printBst.js";
 
 class Tree {
   constructor(array) {
@@ -11,7 +12,7 @@ class Tree {
   buildTree(array) {
     let sortedArray = sort(array);
     this.root = createBST(sortedArray);
-    return this.root;
+    prettyPrint(this.root);
   }
 }
 
