@@ -45,6 +45,52 @@ class Tree {
       }
     }
   }
+
+  _getSuccessor(curr) {
+    curr = curr.right;
+    while (curr && curr.left) {
+      curr = curr.left;
+    }
+    return curr;
+  }
+
+  deleteItem(value) {
+    if (!this.root) {
+      return;
+    }
+
+    let currNode = this.root;
+    let parentNode = null;
+
+    while (currNode) {
+      if (currNode.data > value) {
+        parentNode = currNode;
+        currNode = currNode.left;
+      } else if (currNode.data < value) {
+        parentNode = currNode;
+        currNode = currNode.right;
+      } else {
+        if (currNode.left && currNode.right) {
+          let succ = this._getSuccessor(currNode);
+          this.deleteItem(succ.data);
+          currNode.data = succ.data;
+          break;
+        } else {
+          let childNode = currNode.left ? currNode.left : currNode.right;
+
+          if (!parentNode) {
+            this.root = childNode;
+          } else if (parentNode.right.data === currNode.data) {
+            parentNode.right = childNode;
+          } else {
+            parentNode.left = childNode;
+          }
+          break;
+        }
+      }
+    }
+    prettyPrint(this.root);
+  }
 }
 
 export { Tree };
