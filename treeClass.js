@@ -136,6 +136,28 @@ class Tree {
       queue.shift(); //queue = queue.slice(1);
     }
   }
+
+  preOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required!");
+    }
+
+    if (!this.root) {
+      return;
+    }
+
+    preorder(this.root);
+
+    function preorder(node) {
+      if (!node) {
+        return;
+      }
+
+      callback(node);
+      preorder(node.left);
+      preorder(node.right);
+    }
+  }
 }
 
 export { Tree };
