@@ -110,14 +110,19 @@ class Tree {
     return null;
   }
 
-  levelOrderForEach(callback) {
-    if (typeof callback !== "function") {
+  _checkConditions(cb, root) {
+    if (typeof cb !== "function") {
       throw new Error("A callback is required!");
     }
 
-    if (!this.root) {
-      return;
+    if (!root) {
+      return false;
     }
+    return true;
+  }
+
+  levelOrderForEach(callback) {
+    if (!this._checkConditions(callback, this.root)) return;
 
     // FIFO
     let queue = [];
@@ -138,20 +143,12 @@ class Tree {
   }
 
   preOrderForEach(callback) {
-    if (typeof callback !== "function") {
-      throw new Error("A callback is required!");
-    }
-
-    if (!this.root) {
-      return;
-    }
+    if (!this._checkConditions(callback, this.root)) return;
 
     preorder(this.root);
 
     function preorder(node) {
-      if (!node) {
-        return;
-      }
+      if (!node) return;
 
       callback(node);
       preorder(node.left);
@@ -160,20 +157,13 @@ class Tree {
   }
 
   inOrderForEach(callback) {
-    if (typeof callback !== "function") {
-      throw new Error("A callback is required!");
-    }
-
-    if (!this.root) {
-      return;
-    }
+    if (!this._checkConditions(callback, this.root)) return;
 
     inorder(this.root);
 
     function inorder(node) {
-      if (!node) {
-        return;
-      }
+      if (!node) return;
+
       inorder(node.left);
       callback(node);
       inorder(node.right);
@@ -181,20 +171,13 @@ class Tree {
   }
 
   postOrderForEach(callback) {
-    if (typeof callback !== "function") {
-      throw new Error("A callback is required!");
-    }
-
-    if (!this.root) {
-      return;
-    }
+    if (!this._checkConditions(callback, this.root)) return;
 
     postorder(this.root);
 
     function postorder(node) {
-      if (!node) {
-        return;
-      }
+      if (!node) return;
+
       postorder(node.left);
       postorder(node.right);
       callback(node);
