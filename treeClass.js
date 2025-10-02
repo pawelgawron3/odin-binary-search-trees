@@ -183,6 +183,36 @@ class Tree {
       callback(node);
     }
   }
+
+  height(value) {
+    if (!this.root) {
+      return null;
+    }
+
+    let currNode = this.root;
+
+    function getHeight(node) {
+      if (!node) {
+        return -1;
+      }
+
+      let leftHeight = getHeight(node.left);
+      let rightHeight = getHeight(node.right);
+
+      return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    while (currNode) {
+      if (currNode.data > value) {
+        currNode = currNode.left;
+      } else if (currNode.data < value) {
+        currNode = currNode.right;
+      } else {
+        return getHeight(currNode);
+      }
+    }
+    return null;
+  }
 }
 
 export { Tree };
