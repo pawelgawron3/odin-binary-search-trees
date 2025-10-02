@@ -235,6 +235,30 @@ class Tree {
     }
     return null;
   }
+
+  isBalanced() {
+    if (!this.root) {
+      return null;
+    }
+
+    function checkHeight(node) {
+      if (!node) {
+        return { balanced: true, height: -1 };
+      }
+
+      let left = checkHeight(node.left);
+      if (!left.balanced) return { balanced: false, height: 0 };
+      let right = checkHeight(node.right);
+      if (!right.balanced) return { balanced: false, height: 0 };
+
+      let balanced = Math.abs(left.height - right.height) <= 1;
+      let height = Math.max(left.height, right.height) + 1;
+
+      return { balanced, height };
+    }
+
+    return checkHeight(this.root).balanced;
+  }
 }
 
 export { Tree };
