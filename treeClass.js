@@ -259,6 +259,33 @@ class Tree {
 
     return checkHeight(this.root).balanced;
   }
+
+  rebalance() {
+    if (!this.root) {
+      return null;
+    }
+
+    let array = [];
+    traversal(this.root);
+    this.buildTree(array);
+
+    function traversal(root) {
+      let queue = [];
+      queue.push(root);
+
+      while (queue.length !== 0) {
+        let currNode = queue[0];
+        array.push(currNode.data);
+        if (currNode.left) {
+          queue.push(currNode.left);
+        }
+        if (currNode.right) {
+          queue.push(currNode.right);
+        }
+        queue.shift();
+      }
+    }
+  }
 }
 
 export { Tree };
