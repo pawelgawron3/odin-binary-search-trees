@@ -1,4 +1,7 @@
 import { Tree } from "./treeClass.js";
+import { generateArray } from "./generateArray.js";
 
-const tree = new Tree([5, 4, 3, 2, 1, 9, 15, 14, 22, 88, 99, 100]);
+const arr = generateArray(20);
+
+const tree = new Tree(arr);
 tree.buildTree(tree.array);
