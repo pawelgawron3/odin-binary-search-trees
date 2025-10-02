@@ -213,6 +213,28 @@ class Tree {
     }
     return null;
   }
+
+  depth(value) {
+    if (!this.root) {
+      return null;
+    }
+
+    let currNode = this.root;
+    let edges = 0;
+
+    while (currNode) {
+      if (currNode.data > value) {
+        edges++;
+        currNode = currNode.left;
+      } else if (currNode.data < value) {
+        edges++;
+        currNode = currNode.right;
+      } else {
+        return edges;
+      }
+    }
+    return null;
+  }
 }
 
 export { Tree };
