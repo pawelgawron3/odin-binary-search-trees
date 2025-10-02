@@ -109,6 +109,33 @@ class Tree {
     }
     return null;
   }
+
+  levelOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required!");
+    }
+
+    if (!this.root) {
+      return;
+    }
+
+    // FIFO
+    let queue = [];
+
+    queue.push(this.root);
+
+    while (queue.length !== 0) {
+      let currNode = queue[0];
+      callback(currNode);
+      if (currNode.left) {
+        queue.push(currNode.left);
+      }
+      if (currNode.right) {
+        queue.push(currNode.right);
+      }
+      queue.shift(); //queue = queue.slice(1);
+    }
+  }
 }
 
 export { Tree };
