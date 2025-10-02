@@ -7,3 +7,18 @@ console.log();
 tree.levelOrderForEach((node) => {
   console.log(node.data);
 });
+console.log();
+console.log("Preorder DFS");
+tree.preOrderForEach((node) => {
+  console.log(node.data);
+});
+console.log();
+console.log("Inorder DFS");
+tree.inOrderForEach((node) => {
+  console.log(node.data);
+});
+console.log();
+console.log("Postorder DFS");
+tree.postOrderForEach((node) => {
+  console.log(node.data);
+});
