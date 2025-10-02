@@ -179,6 +179,27 @@ class Tree {
       inorder(node.right);
     }
   }
+
+  postOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required!");
+    }
+
+    if (!this.root) {
+      return;
+    }
+
+    postorder(this.root);
+
+    function postorder(node) {
+      if (!node) {
+        return;
+      }
+      postorder(node.left);
+      postorder(node.right);
+      callback(node);
+    }
+  }
 }
 
 export { Tree };
